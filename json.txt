@@ -1,0 +1,20 @@
+[
+    {
+        "_id": "5ef861783a627d0c76568abf",
+        "name": "kobe",
+        "number": "24",
+        "age": "41",
+        "height": "198",
+        "color": "black",
+        "salary": "4000"
+     },
+     {
+        "_id": "5ef861783a627d0c76568abf",
+        "name": "love",
+        "number": "0",
+        "age": "33",
+        "height": "203",
+        "color": "white",
+        "salary": "2500"
+     }
+]
