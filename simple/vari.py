@@ -1,6 +1,9 @@
+import time
 from functools import reduce
 
 # * 重复出现的次数
+from simple import mymodule
+
 print('abc', end='\n\n')
 
 
@@ -209,3 +212,72 @@ l_l = l_line(2, 3)
 print(l_l(2))
 
 # 函数的另一个高级功能 装饰器
+print(time.time())
+
+
+# 语法糖 装饰函数，封装到timer里
+def timer(func):
+    def wrapper():
+        start_time = time.time()
+        func()
+        end_time = time.time()
+        print(end_time - start_time)
+    return wrapper
+
+@timer
+def i_can_sleep():
+    time.sleep(0.3)
+
+#用了装饰器，可以直接写函数，然后给这个方法加了注解 timer的参数是func传递进去 闭包
+# 闭包传递的是变量，装饰器传递的是函数
+i_can_sleep()
+# start_time = time.time()
+# i_can_sleep()
+# end_time = time.time()
+# print(end_time - start_time)
+
+# 装饰器的使用  带参数加装饰器
+def wait(func):
+    def nei(a, b):
+        print('start')
+        func(a, b)
+        print('end')
+    return nei
+
+@wait
+def add(a, b):
+    print(a + b)
+
+# start
+# 5
+# end
+add(2, 3)
+
+# 装饰器带参数
+def tips(arg):
+    def wait(func):
+        def nei(a, b):
+            print('start %s %s' %(arg, func.__name__))
+            func(a, b)
+            print('end')
+
+        return nei
+    return wait
+
+@tips('add')
+def add_tips(a, b):
+    print(a + b)
+
+# start add add_tips 得到函数名字
+# 7
+# end
+add_tips(3, 4)
+
+# 自定义上下文管理器  有了with就不用显示写finally 中close方法了
+with open('name.txt', encoding='utf-8') as f:
+    for line in f:
+        print(line)
+
+
+# import as f 导入我的模块
+mymodule.print_me()
